@@ -1,0 +1,41 @@
+{
+  "name": "texlyre-templates",
+  "version": "0.1.0",
+  "description": "Community-driven LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor",
+  "author": "Fares Abawi <fares@abawi.me> (https://abawi.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/texlyre/texlyre-templates/issues"
+  },
+  "homepage": "https://texlyre.github.io/texlyre-templates/",
+  "main": "build-index.js",
+  "scripts": {
+    "build": "node build-index.js",
+    "serve": "python -m http.server 8000",
+    "dev": "node build-index.js && python -m http.server 8000",
+    "validate": "node scripts/validate-templates.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/texlyre/texlyre-templates.git"
+  },
+  "keywords": [
+    "latex",
+    "templates",
+    "texlyre",
+    "academic",
+    "documents",
+    "collaboration",
+    "local-first",
+    "real-time"
+  ],
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

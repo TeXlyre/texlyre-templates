@@ -1,0 +1,32 @@
+# categories.yml - Define template categories
+
+categories:
+  - id: academic
+    name: Academic Papers
+    description: Research papers, theses, and academic documents
+    icon: 🎓
+
+  - id: presentations
+    name: Presentations
+    description: Slides and presentation templates for conferences and meetings
+    icon: 📊
+
+  - id: books
+    name: Books & Reports
+    description: Book layouts, technical manuals, and long-form documents
+    icon: 📚
+
+  - id: letters
+    name: Letters & CVs
+    description: Formal letters, resumes, and personal documents
+    icon: 💼
+
+  - id: articles
+    name: Articles & Journals
+    description: Journal articles, magazine layouts, and editorial content
+    icon: 📰
+
+  - id: posters
+    name: Posters & Flyers
+    description: Academic posters, conference presentations, and promotional materials
+    icon: 📋
