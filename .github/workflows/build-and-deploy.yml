@@ -81,6 +81,10 @@ jobs:
         run: |
           cp -r api example/github-pages-example/dist/
 
+      - name: Copy templates to example dist
+        run: |
+          cp -r templates example/github-pages-example/dist/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
