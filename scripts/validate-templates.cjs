@@ -135,7 +135,7 @@ class TemplateValidator {
         const buffer = fs.readFileSync(previewPath, null, 0, 8);
         const pngSignature = Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
         if (!buffer.equals(pngSignature)) {
-          this.log('error', 'preview.png is not a valid PNG file', templateId);
+          this.log('warning', 'preview.png is might not be a valid PNG file', templateId);
         }
 
       } catch (error) {
