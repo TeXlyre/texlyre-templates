@@ -165,8 +165,14 @@ async function buildApi() {
           }
 
           const template = {
-            ...metadata,
+            id: templateId,
+            name: metadata.name,
+            description: metadata.description,
             category: categoryId,
+            tags: metadata.tags,
+            author: metadata.author,
+            version: metadata.version,
+            lastUpdated: metadata.lastUpdated,
             downloadUrl: resolveDownloadUrl(metadata.downloadUrl, categoryId, templateId),
             previewImage: resolveImageUrl(metadata.previewImage, templatePath, categoryId, templateId)
           };
