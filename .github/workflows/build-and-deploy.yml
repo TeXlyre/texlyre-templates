@@ -39,9 +39,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Validate templates
         run: npm run validate
@@ -57,9 +58,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Install root dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build library
         run: npm run build
@@ -67,16 +69,10 @@ jobs:
       - name: Build API
         run: npm run build:api
 
-      - name: Copy built library to example
-        run: |
-          mkdir -p example/github-pages-example/node_modules/texlyre-templates
-          cp -r dist example/github-pages-example/node_modules/texlyre-templates/
-          cp package.json example/github-pages-example/node_modules/texlyre-templates/
-
       - name: Install example dependencies
         run: |
           cd example/github-pages-example
-          npm ci
+          npm install
 
       - name: Build GitHub Pages example
         run: |
