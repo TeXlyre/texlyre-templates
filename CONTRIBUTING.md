@@ -5,21 +5,22 @@ Thank you for your interest in contributing to the TeXlyre Templates collection!
 ## Template Guidelines
 
 ### Quality Standards
-- **Completeness**: Templates must compile successfully with standard LaTeX distributions
+
+- **Completeness**: Templates must compile successfully with `pdftex` or `xetex` on [TeXlyre](https://texlyre.github.io/texlyre/)
 - **Documentation**: Include clear comments and documentation within the template
-- **Best Practices**: Follow LaTeX conventions and clean coding principles
+- **Best Practices**: Follow LaTeX conventions
 - **Licensing**: Only contribute templates you have legal rights to share
 
 ### Template Categories
 
 We organize templates into these categories:
 
-- **Academic Papers** 🎓 - Research papers, theses, dissertations
-- **Presentations** 📊 - Beamer slides, conference presentations
-- **Books & Reports** 📚 - Long-form documents, technical manuals
-- **Letters & CVs** 💼 - Formal correspondence, resumes, cover letters
-- **Articles & Journals** 📰 - Journal articles, magazine layouts
-- **Posters & Flyers** 📋 - Academic posters, promotional materials
+- **Academic Papers** - Research papers, theses, dissertations
+- **Presentations** - Beamer slides, conference presentations
+- **Books & Reports** - Long-form documents, technical manuals
+- **Letters & CVs** - Formal correspondence, resumes, cover letters
+- **Articles & Journals** - Journal articles, magazine layouts
+- **Posters & Flyers** - Academic posters, promotional materials
 
 Don't see your category? [Open an issue](https://github.com/texlyre/texlyre-templates/issues) to discuss adding new categories.
 
@@ -35,8 +36,9 @@ templates/[category]/[template-id]/
 ```
 
 ### Template ID Requirements
+
 - Use lowercase letters, numbers, and hyphens only
-- Be descriptive but concise (e.g., `ieee-conference-paper`, `basic-cv`)
+- Be descriptive but concise (e.g., `ieee-conference-paper`, `basic-cv`) and include the year (YY) or month and year (MMYY) if necessary (e.g., `acm-conference-paper-25`, `new-fancy-journal-0224`).
 - Must be unique within the category
 
 ## metadata.json Schema
@@ -68,6 +70,7 @@ templates/[category]/[template-id]/
 | `lastUpdated` | ✅ | ISO 8601 date string |
 
 ### Tag Guidelines
+
 - Include relevant LaTeX packages (e.g., `tikz`, `beamer`, `memoir`)
 - Add subject areas (e.g., `physics`, `computer-science`, `mathematics`)
 - Include document types (e.g., `thesis`, `article`, `letter`)
@@ -76,21 +79,27 @@ templates/[category]/[template-id]/
 
 ## Creating template.zip
 
-Your `template.zip` should contain a complete, working LaTeX project:
+Your `template.zip` should contain a complete, working LaTeX project, compiled on TeXlyre or using the SwiftLaTeX WASM compilers:
 
 ### Required Files
+
 - **Main file**: Clear entry point (e.g., `main.tex`, `document.tex`)
 - **Dependencies**: All custom style files, images, bibliography files
 - **Documentation**: README.txt or comments explaining structure
 
 ### Best Practices
+
 - Use relative paths for all includes and images
 - Organize files in logical subdirectories (`figures/`, `sections/`, etc.)
 - Include sample content that demonstrates all features
 - Add clear comments explaining customizable sections
 - Ensure compilation with both `pdflatex` and `xelatex` when possible
 
+**NOTE** It is recommended to include the `.texlyre_cache/__tex` directory (include them when prompted in the texlyre project and files export)
+in your `template.zip` file to allow users to compile your template for the first time while being offline.
+
 ### File Organization Example
+
 ```
 template.zip contents:
 ├── main.tex              # Main document
@@ -118,6 +127,7 @@ Preview images help users quickly understand your template:
 ## Development Workflow
 
 ### 1. Setup
+
 ```bash
 # Fork and clone the repository
 git clone https://github.com/your-username/texlyre-templates.git
@@ -128,6 +138,7 @@ npm install
 ```
 
 ### 2. Create Your Template
+
 ```bash
 # Create category directory (if new)
 mkdir -p templates/academic
@@ -142,21 +153,21 @@ mkdir templates/academic/my-template
 ```
 
 ### 3. Validate Your Template
+
 ```bash
 # Run validation to check your template
 npm run validate
 
-# Build and test the index
-npm run build
-npm run serve
+# Build and test the API
+npm run build:api
+npm run pages-example
 ```
 
 ### 4. Test Integration
-1. Start local server: `npm run serve`
-2. Open TeXlyre in another tab
-3. Go to Import Projects → From Template Gallery
-4. Change the API URL to `http://localhost:8000/api/templates.json`
-5. Test importing your template
+
+1. Start local server: `npm run pages-example`
+2. Open browser to `http://localhost:3000`
+3. Test importing your template
 
 ## Pre-Submission Checklist
 
@@ -170,19 +181,21 @@ Before submitting your pull request:
 - [ ] Tags are relevant and well-chosen
 - [ ] Preview image shows representative output
 - [ ] Validation script passes (`npm run validate`)
-- [ ] Template tested in TeXlyre
+- [ ] Template tested in example application
 - [ ] Clear commit messages describing the template
 
 ## Submission Process
 
 ### 1. Create Pull Request
+
 - **Title**: `Add [category]: [template-name]`
 - **Description**: 
   - What the template is for
   - Key features and use cases
   - Any special requirements or notes
 
-### 2. PR Template
+### 2. Example PR Description
+
 ```markdown
 ## Template Information
 - **Category**: Academic Papers
@@ -206,6 +219,7 @@ Requires IEEEtran package (included in most LaTeX distributions).
 ```
 
 ### 3. Review Process
+
 - Automated validation runs on all PRs
 - Manual review for quality and completeness
 - Feedback and iteration if needed
@@ -233,15 +247,10 @@ Looking for inspiration? Consider creating templates for:
 - Creative writing layouts
 - Specialized academic formats
 
-## Community
-
-- **Discussions**: Use GitHub Discussions for questions
-- **Issues**: Report bugs and request features
-- **TeXlyre**: Main project at [github.com/texlyre/texlyre](https://github.com/texlyre/texlyre)
-
 ## License
 
 By contributing templates, you agree that:
+
 - You have the legal right to share the template
 - The template can be distributed under an open license
 - Users can modify and redistribute the template
@@ -249,4 +258,4 @@ By contributing templates, you agree that:
 
 ---
 
-Thank you for helping build a collection of LaTeX templates for the TeXlyre community! 
+Thank you for helping build a collection of LaTeX templates for the TeXlyre community!

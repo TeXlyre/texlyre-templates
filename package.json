@@ -1,24 +1,42 @@
 {
   "name": "texlyre-templates",
   "version": "0.1.0",
-  "description": "Community-driven LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor",
+  "description": "LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor",
   "author": "Fares Abawi <fares@abawi.me> (https://abawi.me)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/texlyre/texlyre-templates.git"
+  },
+  "homepage": "https://texlyre.github.io/texlyre-templates/",
   "bugs": {
     "url": "https://github.com/texlyre/texlyre-templates/issues"
   },
-  "homepage": "https://texlyre.github.io/texlyre-templates/",
-  "main": "build-index.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "node build-index.js",
-    "serve": "python -m http.server 8000",
-    "dev": "node build-index.js && python -m http.server 8000",
-    "validate": "node scripts/validate-templates.js"
+    "build": "rollup -c rollup.config.js",
+    "build:api": "node scripts/build-api.cjs",
+    "prepare": "npm run build",
+    "validate": "node scripts/validate-templates.cjs",
+    "dev": "npm run build:api && npm run build",
+    "build:pages-example": "npm run dev && cd example/github-pages-example && npm install",
+    "build:webpack-example": "npm run dev && cd example/webpack-bundled-example && npm install",
+    "pages-example": "cd example/github-pages-example && npm start",
+    "webpack-example": "cd example/webpack-bundled-example && npm start",
+    "clean": "rm -rf dist api"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/texlyre/texlyre-templates.git"
-  },
+  "files": [
+    "dist/",
+    "src/",
+    "templates/",
+    "categories.yml",
+    "api/",
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "latex",
     "templates",
@@ -26,14 +44,16 @@
     "academic",
     "documents",
     "collaboration",
-    "local-first",
-    "real-time"
+    "local-first"
   ],
-  "dependencies": {
-    "js-yaml": "^4.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "chalk": "^4.1.2"
+    "@rollup/plugin-typescript": "^11.1.0",
+    "js-yaml": "^4.1.0",
+    "rollup": "^3.29.0",
+    "rollup-plugin-dts": "^6.0.0",
+    "typescript": "^5.0.0",
+    "tslib": "^2.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

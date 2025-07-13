@@ -1,4 +1,4 @@
-// scripts/validate-templates.js - Validate template structure and metadata
+                                   // scripts/validate-templates.cjs
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
@@ -53,7 +53,6 @@ class TemplateValidator {
     try {
       const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
 
-      // Required fields
       const requiredFields = ['id', 'name', 'description', 'category', 'tags', 'author', 'version', 'lastUpdated'];
       for (const field of requiredFields) {
         if (!metadata[field]) {
@@ -61,12 +60,10 @@ class TemplateValidator {
         }
       }
 
-      // ID validation
       if (metadata.id !== templateId) {
         this.log('error', `ID mismatch: metadata.id (${metadata.id}) != directory name (${templateId})`, templateId);
       }
 
-      // Category validation
       if (metadata.category !== categoryId) {
         this.log('error', `Category mismatch: metadata.category (${metadata.category}) != parent directory (${categoryId})`, templateId);
       }
@@ -75,26 +72,22 @@ class TemplateValidator {
         this.log('error', `Invalid category: ${metadata.category}`, templateId);
       }
 
-      // Tags validation
       if (!Array.isArray(metadata.tags)) {
         this.log('error', 'Tags must be an array', templateId);
       } else if (metadata.tags.length === 0) {
         this.log('warning', 'No tags specified', templateId);
       }
 
-      // Date validation
       try {
         new Date(metadata.lastUpdated);
       } catch {
         this.log('error', 'Invalid lastUpdated date format', templateId);
       }
 
-      // Version validation
       if (!/^\d+\.\d+\.\d+$/.test(metadata.version)) {
         this.log('warning', 'Version should follow semantic versioning (x.y.z)', templateId);
       }
 
-      // Description length
       if (metadata.description && metadata.description.length < 20) {
         this.log('warning', 'Description is quite short, consider adding more detail', templateId);
       }
@@ -112,15 +105,13 @@ class TemplateValidator {
     try {
       const stats = fs.statSync(templateZipPath);
 
-      // Check file size (warn if too large)
-      const maxSize = 50 * 1024 * 1024; // 50MB
+      const maxSize = 50 * 1024 * 1024;
       if (stats.size > maxSize) {
         this.log('warning', `Template ZIP is quite large (${Math.round(stats.size / 1024 / 1024)}MB)`, templateId);
       }
 
-      // Check if file is actually a ZIP (basic check)
-      const buffer = fs.readFileSync(templateZipPath);
-      if (buffer.length < 4 || buffer.readUInt32LE(0) !== 0x04034b50) {
+      const buffer = fs.readFileSync(templateZipPath, null, 0, 4);
+      if (buffer.length >= 4 && buffer.readUInt32LE(0) !== 0x04034b50) {
         this.log('error', 'template.zip does not appear to be a valid ZIP file', templateId);
       }
 
@@ -136,13 +127,11 @@ class TemplateValidator {
       try {
         const stats = fs.statSync(previewPath);
 
-        // Check file size
-        const maxSize = 5 * 1024 * 1024; // 5MB
+        const maxSize = 5 * 1024 * 1024;
         if (stats.size > maxSize) {
           this.log('warning', 'Preview image is quite large, consider optimizing', templateId);
         }
 
-        // Basic PNG validation
         const buffer = fs.readFileSync(previewPath, null, 0, 8);
         const pngSignature = Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
         if (!buffer.equals(pngSignature)) {
@@ -188,9 +177,8 @@ class TemplateValidator {
   }
 
   async validateAll() {
-    console.log('🔍 Validating TeXlyre Templates...\n');
+    console.log('Validating TeXlyre Templates...\n');
 
-    // Validate categories first
     const validCategories = this.validateCategories();
     if (validCategories.length === 0) {
       return false;
@@ -201,7 +189,6 @@ class TemplateValidator {
       return false;
     }
 
-    // Get all category directories
     const categoryDirs = fs.readdirSync(TEMPLATES_DIR, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name);
@@ -214,7 +201,6 @@ class TemplateValidator {
     let totalTemplates = 0;
     let validTemplates = 0;
 
-    // Validate each category
     for (const categoryId of categoryDirs) {
       if (!validCategories.includes(categoryId)) {
         this.log('warning', `Category directory "${categoryId}" not found in categories.yml`);
@@ -223,34 +209,28 @@ class TemplateValidator {
 
       const categoryPath = path.join(TEMPLATES_DIR, categoryId);
 
-      // Get all templates in this category
       const templateDirs = fs.readdirSync(categoryPath, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name);
 
-      console.log(`\n📁 Validating category: ${categoryId} (${templateDirs.length} templates)`);
+      console.log(`\nValidating category: ${categoryId} (${templateDirs.length} templates)`);
 
       for (const templateId of templateDirs) {
         totalTemplates++;
         const templatePath = path.join(categoryPath, templateId);
 
-        console.log(`\n  📄 ${templateId}`);
+        console.log(`\n  ${templateId}`);
 
-        // Validate required files
         if (!this.validateRequiredFiles(templatePath, templateId)) {
           continue;
         }
 
-        // Validate metadata
         const metadata = this.validateMetadata(templatePath, templateId, categoryId, validCategories);
         if (!metadata) {
           continue;
         }
 
-        // Validate ZIP file
         this.validateZipFile(templatePath, templateId);
-
-        // Validate preview image
         this.validatePreviewImage(templatePath, templateId);
 
         validTemplates++;
@@ -258,9 +238,8 @@ class TemplateValidator {
       }
     }
 
-    // Summary
     console.log('\n' + '='.repeat(50));
-    console.log('📊 VALIDATION SUMMARY');
+    console.log('VALIDATION SUMMARY');
     console.log('='.repeat(50));
     console.log(`Total templates: ${totalTemplates}`);
     console.log(`Valid templates: ${validTemplates}`);
@@ -268,23 +247,22 @@ class TemplateValidator {
     console.log(`Warnings: ${this.warnings.length}`);
 
     if (this.errors.length > 0) {
-      console.log('\n❌ ERRORS:');
+      console.log('\nERRORS:');
       this.errors.forEach(error => console.log(`  • ${error}`));
     }
 
     if (this.warnings.length > 0) {
-      console.log('\n⚠️  WARNINGS:');
+      console.log('\nWARNINGS:');
       this.warnings.forEach(warning => console.log(`  • ${warning}`));
     }
 
     const success = this.errors.length === 0;
-    console.log(`\n${success ? '✅ All validations passed!' : '❌ Validation failed - please fix errors above'}`);
+    console.log(`\n${success ? 'All validations passed!' : 'Validation failed - please fix errors above'}`);
 
     return success;
   }
 }
 
-// Run validation
 async function main() {
   const validator = new TemplateValidator();
   const success = await validator.validateAll();

@@ -1,0 +1,29 @@
+{
+  "name": "texlyre-templates-demo-pages",
+  "version": "0.1.0",
+  "description": "GitHub Pages Demo for TeXlyre Templates",
+  "author": "Fares Abawi <fares@abawi.me> (https://abawi.me)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/texlyre/texlyre-templates.git"
+  },
+  "homepage": "https://texlyre.github.io/texlyre-templates/",
+  "private": true,
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development"
+  },
+  "dependencies": {
+    "texlyre-templates": "file:../.."
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}

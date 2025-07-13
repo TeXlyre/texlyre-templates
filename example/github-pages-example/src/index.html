@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor">
+  <title>TeXlyre Templates</title>
+</head>
+<body>
+  <header>
+    <h1>TeXlyre Templates</h1>
+    <div class="links">
+      <a href="https://github.com/texlyre/texlyre-templates" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.npmjs.com/package/texlyre-templates" target="_blank" rel="noopener noreferrer">npm</a>
+      <a href="https://texlyre.github.io/texlyre/" target="_blank" rel="noopener noreferrer">TeXlyre Editor</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="demo-container">
+      <h2>Interactive Template Browser</h2>
+      <p>Browse and search LaTeX templates for TeXlyre, the local-first collaborative LaTeX editor.</p>
+
+      <div class="controls">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search templates..." />
+        </div>
+        <div class="filter-controls">
+          <select id="categoryFilter">
+            <option value="">All Categories</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalTemplates">0</div>
+          <div class="stat-label">Total Templates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="totalCategories">0</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="lastUpdated">-</div>
+          <div class="stat-label">Last Updated</div>
+        </div>
+      </div>
+
+      <div id="templates-grid" class="templates-grid">
+        <!-- Templates will be loaded here -->
+      </div>
+
+      <div id="loading" class="loading">
+        <p>Loading templates...</p>
+      </div>
+
+      <div id="error" class="error" style="display: none;">
+        <p>Error loading templates. Please try again later.</p>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Features</h2>
+      <ul>
+        <li>Community-driven LaTeX template collection</li>
+        <li>Integration with TeXlyre collaborative editor</li>
+        <li>Searchable by tags, categories, and content</li>
+        <li>Easy import into TeXlyre projects</li>
+        <li>Preview images for quick template identification</li>
+        <li>Standardized metadata and validation</li>
+      </ul>
+    </section>
+
+    <section class="api-info">
+      <h2>API Reference</h2>
+      <p>Access templates programmatically using our JSON API:</p>
+      <div class="api-endpoint">
+        GET https://texlyre.github.io/texlyre-templates/api/templates.json
+      </div>
+      <p>The API returns all available templates organized by category, including metadata, download URLs, and preview images.</p>
+    </section>
+
+    <section class="usage">
+      <h2>Usage</h2>
+      <pre><code>import { templatesApi } from 'texlyre-templates';
+
+// Get all templates
+const api = await templatesApi.getTemplates();
+
+// Search templates
+const results = await templatesApi.searchTemplates('ieee');
+
+// Get templates by category
+const papers = await templatesApi.getTemplatesByCategory('academic');
+
+// Download a template
+const blob = await templatesApi.downloadTemplate(template);</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>MIT License &copy; 2025 <a href="https://abawi.me">Fares Abawi</a></p>
+    <p>Part of the <a href="https://texlyre.github.io/texlyre/">TeXlyre</a> project</p>
+  </footer>
+</body>
+</html>

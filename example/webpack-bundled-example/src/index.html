@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeXlyre Templates Demo</title>
+</head>
+<body>
+  <div class="container">
+    <h1>TeXlyre Templates Demo</h1>
+    <p>This demonstrates the TeXlyre Templates API integration.</p>
+
+    <div class="demo-section">
+      <h2>Template Statistics</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-label">Total Templates:</span>
+          <span id="totalTemplates" class="stat-value">Loading...</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Categories:</span>
+          <span id="totalCategories" class="stat-value">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Search Templates</h2>
+      <input type="text" id="searchInput" placeholder="Search templates..." />
+      <div id="searchResults" class="results"></div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Browse by Category</h2>
+      <select id="categorySelect">
+        <option value="">Select a category...</option>
+      </select>
+      <div id="categoryResults" class="results"></div>
+    </div>
+
+    <div id="loading" class="loading">Loading templates...</div>
+    <div id="error" class="error" style="display: none;">Error loading templates</div>
+  </div>
+</body>
+</html>
