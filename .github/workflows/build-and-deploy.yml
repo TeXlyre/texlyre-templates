@@ -8,6 +8,7 @@ on:
       - 'categories.yml'
       - 'src/**'
       - 'scripts/**'
+      - 'example/**'
   pull_request:
     branches: [ main ]
     paths:
@@ -15,6 +16,7 @@ on:
       - 'categories.yml'
       - 'src/**'
       - 'scripts/**'
+      - 'example/**'
   workflow_dispatch:
 
 permissions:
@@ -39,7 +41,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Validate templates
         run: npm run validate
@@ -56,8 +58,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install root dependencies
+        run: npm ci
 
       - name: Build library
         run: npm run build
@@ -65,11 +67,25 @@ jobs:
       - name: Build API
         run: npm run build:api
 
+      - name: Copy built library to example
+        run: |
+          mkdir -p example/github-pages-example/node_modules/texlyre-templates
+          cp -r dist example/github-pages-example/node_modules/texlyre-templates/
+          cp package.json example/github-pages-example/node_modules/texlyre-templates/
+
+      - name: Install example dependencies
+        run: |
+          cd example/github-pages-example
+          npm ci
+
       - name: Build GitHub Pages example
         run: |
           cd example/github-pages-example
-          npm install
           npm run build
+
+      - name: Copy API to example dist
+        run: |
+          cp -r api example/github-pages-example/dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

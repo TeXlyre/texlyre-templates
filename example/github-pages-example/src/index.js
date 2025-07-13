@@ -1,6 +1,49 @@
 // example/github-pages-example/src/index.js
-import { templatesApi } from '../../../dist';
 import './styles.css';
+
+// Simple API client since we can't easily import the library in webpack
+class SimpleTemplatesApi {
+  constructor(baseUrl = 'https://texlyre.github.io/texlyre-templates') {
+    this.baseUrl = baseUrl;
+  }
+
+  async getTemplates() {
+    const response = await fetch(`${this.baseUrl}/api/templates.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch templates: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async searchTemplates(query) {
+    const api = await this.getTemplates();
+    const allTemplates = api.categories.flatMap(cat => cat.templates);
+
+    const lowercaseQuery = query.toLowerCase();
+    return allTemplates.filter(template =>
+      template.name.toLowerCase().includes(lowercaseQuery) ||
+      template.description.toLowerCase().includes(lowercaseQuery) ||
+      template.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery)) ||
+      template.author.toLowerCase().includes(lowercaseQuery)
+    );
+  }
+
+  async getTemplatesByCategory(categoryId) {
+    const api = await this.getTemplates();
+    const category = api.categories.find(cat => cat.id === categoryId);
+    return category?.templates || [];
+  }
+
+  async downloadTemplate(template) {
+    const response = await fetch(template.downloadUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to download template: ${response.statusText}`);
+    }
+    return response.blob();
+  }
+}
+
+const templatesApi = new SimpleTemplatesApi();
 
 class TemplatesBrowser {
   constructor() {
