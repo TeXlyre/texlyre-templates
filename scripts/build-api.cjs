@@ -40,7 +40,6 @@ function loadCategories() {
       throw new Error('Invalid categories.yml structure. Expected { categories: [...] }');
     }
 
-    // Validate category structure
     for (const category of categoriesData.categories) {
       if (!category.id || !category.name || !category.description) {
         throw new Error(`Invalid category structure. Each category must have id, name, and description: ${JSON.stringify(category)}`);
@@ -64,6 +63,34 @@ function discoverTemplateCategories() {
     .map(dirent => dirent.name);
 }
 
+function resolveImageUrl(metadataUrl, templatePath, categoryId, templateId) {
+  if (metadataUrl) {
+    if (metadataUrl.startsWith('http://') || metadataUrl.startsWith('https://')) {
+      return metadataUrl;
+    } else {
+      return `${BASE_URL}/templates/${categoryId}/${templateId}/${metadataUrl}`;
+    }
+  }
+
+  if (fs.existsSync(path.join(templatePath, 'preview.png'))) {
+    return `${BASE_URL}/templates/${categoryId}/${templateId}/preview.png`;
+  }
+
+  return undefined;
+}
+
+function resolveDownloadUrl(metadataUrl, categoryId, templateId) {
+  if (metadataUrl) {
+    if (metadataUrl.startsWith('http://') || metadataUrl.startsWith('https://')) {
+      return metadataUrl;
+    } else {
+      return `${BASE_URL}/templates/${categoryId}/${templateId}/${metadataUrl}`;
+    }
+  }
+
+  return `${BASE_URL}/templates/${categoryId}/${templateId}/template.zip`;
+}
+
 async function buildApi() {
   console.log('Building templates API...');
 
@@ -74,7 +101,6 @@ async function buildApi() {
     console.log(`Configured categories: ${categories.map(c => c.id).join(', ')}`);
     console.log(`Discovered category directories: ${discoveredCategories.join(', ')}`);
 
-    // Warn about mismatches
     const configuredIds = new Set(categories.map(c => c.id));
     const undefinedDirs = discoveredCategories.filter(dir => !configuredIds.has(dir));
     const missingDirs = categories.filter(cat => !discoveredCategories.includes(cat.id));
@@ -140,12 +166,9 @@ async function buildApi() {
 
           const template = {
             ...metadata,
-            category: categoryId, // Ensure consistency
-            downloadUrl: metadata.downloadUrl || `${BASE_URL}/templates/${categoryId}/${templateId}/template.zip`,
-            previewImage: metadata.previewImage ||
-              (fs.existsSync(path.join(templatePath, 'preview.png'))
-                ? `${BASE_URL}/templates/${categoryId}/${templateId}/preview.png`
-                : undefined)
+            category: categoryId,
+            downloadUrl: resolveDownloadUrl(metadata.downloadUrl, categoryId, templateId),
+            previewImage: resolveImageUrl(metadata.previewImage, templatePath, categoryId, templateId)
           };
 
           category.templates.push(template);
@@ -157,16 +180,13 @@ async function buildApi() {
       }
     }
 
-    // Create output directory
     const apiDir = path.dirname(OUTPUT_FILE);
     if (!fs.existsSync(apiDir)) {
       fs.mkdirSync(apiDir, { recursive: true });
     }
 
-    // Write API file
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(apiData, null, 2));
 
-    // Statistics
     const totalTemplates = apiData.categories.reduce((sum, cat) => sum + cat.templates.length, 0);
     const categoriesWithTemplates = apiData.categories.filter(cat => cat.templates.length > 0).length;
 
