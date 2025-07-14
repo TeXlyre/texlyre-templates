@@ -22,3 +22,7 @@ categories:
   - id: posters
     name: Posters & Flyers
     description: Academic posters, conference presentations, and promotional materials
+
+  - id: miscellaneous
+    name: TeXlyre Samples
+    description: Various examples

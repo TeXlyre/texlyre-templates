@@ -1,0 +1,12 @@
+{
+  "id": "tikz-samples",
+  "name": "TeXlyre TikZ Example",
+  "description": "TeXlyre TikZ example compiled with swiftlatex's PdfTeX.",
+  "category": "miscellaneous",
+  "tags": ["samples", "examples", "pdftex", "tikz", "plots", "diagrams", "figures", "2025"],
+  "author": "TeXlyre Templates",
+  "version": "1.0.0",
+  "lastUpdated": "2025-07-14T12:00:00Z",
+  "downloadUrl": "template.zip",
+  "previewImage": "preview.png"
+}
