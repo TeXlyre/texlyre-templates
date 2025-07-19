@@ -1,0 +1,12 @@
+{
+  "id": "rover-resume",
+  "name": "Rover Resume",
+  "description": "A collection of Rover Resume/CV templates. This list offers a wide range of CV styles that are compatible with PdfTeX, with the exception of the fancy Rover template, which requires XeTeX. This template is a modification of Rover Resume (https://github.com/subidit/rover-resume). Rover Resume by Subidit is licensed under CC BY 4.0. ",
+  "category": "letters",
+  "tags": ["resume", "cv", "professional", "portfolio", "personal", "job", "work", "applicant"],
+  "author": "TeXlyre Templates",
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-30T18:13:00Z",
+  "downloadUrl": "template.zip",
+  "previewImage": "preview.png"
+}
