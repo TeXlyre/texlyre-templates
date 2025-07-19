@@ -1,0 +1,12 @@
+{
+  "id": "ieee-conference-paper-24",
+  "name": "IEEE Conference Paper 2024",
+  "description": "The IEEE manuscript templates for conference proceedings. This template is based on the official IEEE LaTeX sample (https://www.ieee.org/conferences/publishing/templates).",
+  "category": "academic",
+  "tags": ["ieee", "conference", "engineering", "paper", "academic", "research", "bibliography", "2024"],
+  "author": "TeXlyre Templates",
+  "version": "1.0.0",
+  "lastUpdated": "2024-06-01T10:00:00Z",
+  "downloadUrl": "template.zip",
+  "previewImage": "preview.png"
+}
