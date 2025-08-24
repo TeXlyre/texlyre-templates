@@ -1,0 +1,12 @@
+{
+  "id": "beamer-metropolis",
+  "name": "Beamer Metropolis",
+  "description": "LaTeX beamer template for presentations with a clean and simple style based on the Metropolis theme (https://github.com/klb2/beamer-presentation-template). Beamer Metropolis template by Karl-Ludwig Besser is licensed under Apache 2.0 - Copyright (c) 2023. ",
+  "category": "presentation",
+  "tags": ["beamer", "seminar", "slides", "metropolis", "presentation-style", "powerpoint", "figures", "talk", "academic", "template"],
+  "author": "TeXlyre Templates",
+  "version": "1.0.0",
+  "lastUpdated": "2025-06-24T17:54:00Z",
+  "downloadUrl": "template.zip",
+  "previewImage": "preview.png"
+}
