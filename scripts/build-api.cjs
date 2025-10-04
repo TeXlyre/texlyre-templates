@@ -174,7 +174,8 @@ async function buildApi() {
             version: metadata.version,
             lastUpdated: metadata.lastUpdated,
             downloadUrl: resolveDownloadUrl(metadata.downloadUrl, categoryId, templateId),
-            previewImage: resolveImageUrl(metadata.previewImage, templatePath, categoryId, templateId)
+            previewImage: resolveImageUrl(metadata.previewImage, templatePath, categoryId, templateId),
+            type: metadata.type || 'latex'
           };
 
           category.templates.push(template);

@@ -24,6 +24,10 @@ export function validateTemplateMetadata(metadata: any): TemplateMetadata {
     throw new Error('Invalid lastUpdated date format');
   }
 
+  if (metadata.type && metadata.type !== 'latex' && metadata.type !== 'typst') {
+    throw new Error('Type must be either "latex" or "typst"');
+  }
+
   if (metadata.description && metadata.description.length < 20) {
     console.warn('Description is quite short, consider adding more detail');
   }
@@ -79,16 +83,18 @@ export function generateTemplateMetadata(
   description: string,
   category: string,
   author: string,
-  tags: string[] = []
+  tags: string[] = [],
+  type: 'latex' | 'typst' = 'latex'
 ): TemplateMetadata {
   return {
     id,
     name,
     description,
     category,
-    tags: [...new Set(tags)], // Remove duplicates
+    tags: [...new Set(tags)],
     author,
     version: '1.0.0',
-    lastUpdated: new Date().toISOString()
+    lastUpdated: new Date().toISOString(),
+    type
   };
 }

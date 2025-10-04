@@ -1,7 +1,6 @@
 // example/github-pages-example/src/index.js
 import './styles.css';
 
-// Simple API client since we can't easily import the library in webpack
 class SimpleTemplatesApi {
   constructor(baseUrl = 'https://texlyre.github.io/texlyre-templates') {
     this.baseUrl = baseUrl;
@@ -52,6 +51,7 @@ class TemplatesBrowser {
     this.filteredTemplates = [];
     this.currentSearch = '';
     this.currentCategory = '';
+    this.currentType = '';
     this.apiData = null;
   }
 
@@ -93,6 +93,7 @@ class TemplatesBrowser {
   setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
+    const typeFilter = document.getElementById('typeFilter');
 
     searchInput.addEventListener('input', (e) => {
       this.currentSearch = e.target.value;
@@ -103,6 +104,11 @@ class TemplatesBrowser {
       this.currentCategory = e.target.value;
       this.filterTemplates();
     });
+
+    typeFilter.addEventListener('change', (e) => {
+      this.currentType = e.target.value;
+      this.filterTemplates();
+    });
   }
 
   filterTemplates() {
@@ -110,6 +116,10 @@ class TemplatesBrowser {
 
     if (this.currentCategory) {
       filtered = filtered.filter(template => template.category === this.currentCategory);
+    }
+
+    if (this.currentType) {
+      filtered = filtered.filter(template => (template.type || 'latex') === this.currentType);
     }
 
     if (this.currentSearch) {
@@ -154,19 +164,21 @@ class TemplatesBrowser {
     card.className = 'template-card';
 
     const category = this.categories.find(cat => cat.id === template.category);
+    const templateType = template.type || 'latex';
 
     card.innerHTML = `
       <div class="template-preview">
-        ${template.previewImage 
-          ? `<img src="${template.previewImage}" alt="${template.name} preview" loading="lazy">`
-          : '<div class="no-preview">No Preview</div>'
-        }
+        ${template.previewImage
+        ? `<img src="${template.previewImage}" alt="${template.name} preview" loading="lazy">`
+        : '<div class="no-preview">No Preview</div>'
+      }
       </div>
       <div class="template-info">
         <h3 class="template-name">${template.name}</h3>
         <p class="template-description">${template.description}</p>
         <div class="template-meta">
           <span class="template-category">${category ? category.name : template.category}</span>
+          <span class="template-type">${templateType.toUpperCase()}</span>
           <span class="template-author">by ${template.author}</span>
         </div>
         <div class="template-tags">
@@ -212,7 +224,8 @@ class TemplatesBrowser {
     });
 
     texlyreBtn.addEventListener('click', () => {
-      const texlyreUrl = `https://texlyre.github.io/texlyre/?template=${encodeURIComponent(template.downloadUrl)}`;
+      const newProjectType = template.type || 'latex';
+      const texlyreUrl = `https://texlyre.github.io/texlyre/#newProjectName:${encodeURIComponent(template.name)}&newProjectDescription:${encodeURIComponent(template.description)}&newProjectType:${newProjectType}&newProjectTags:${encodeURIComponent(template.tags.join(','))}&files:${encodeURIComponent(template.downloadUrl)}`;
       window.open(texlyreUrl, '_blank');
     });
   }
@@ -238,7 +251,6 @@ class TemplatesBrowser {
   }
 }
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const browser = new TemplatesBrowser();
   browser.init();

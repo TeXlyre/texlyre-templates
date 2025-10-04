@@ -52,7 +52,8 @@ templates/[category]/[template-id]/
   "tags": ["latex", "academic", "ieee", "conference"],
   "author": "Your Name or Organization",
   "version": "1.0.0",
-  "lastUpdated": "2024-12-19T10:00:00Z"
+  "lastUpdated": "2024-12-19T10:00:00Z",
+  "type": "latex"
 }
 ```
 
@@ -63,6 +64,7 @@ templates/[category]/[template-id]/
 | `id` | ✅ | Must match directory name exactly |
 | `name` | ✅ | Human-readable template name |
 | `description` | ✅ | Detailed description (20+ characters) |
+| `type` | ❌ | Template type: "latex" or "typst" (defaults to "latex") |
 | `category` | ✅ | Must match parent directory name |
 | `tags` | ✅ | Array of relevant keywords |
 | `author` | ✅ | Your name or organization |

@@ -1,10 +1,11 @@
 // src/types.ts
-
 export interface TemplateCategory {
   id: string;
   name: string;
   description: string;
 }
+
+export type TemplateType = 'latex' | 'typst';
 
 export interface Template {
   id: string;
@@ -17,6 +18,7 @@ export interface Template {
   lastUpdated: string;
   downloadUrl: string;
   previewImage?: string;
+  type?: TemplateType;
 }
 
 export interface TemplatesAPI {
@@ -41,4 +43,5 @@ export interface TemplateMetadata {
   lastUpdated: string;
   downloadUrl?: string;
   previewImage?: string;
+  type?: TemplateType;
 }

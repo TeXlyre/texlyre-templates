@@ -113,7 +113,7 @@ class TemplatesDemo {
 }
 
 // Global functions for button clicks
-window.downloadTemplate = async function(templateId, downloadUrl) {
+window.downloadTemplate = async function (templateId, downloadUrl) {
   try {
     const template = { id: templateId, downloadUrl };
     const blob = await templatesApi.downloadTemplate(template);
@@ -132,7 +132,7 @@ window.downloadTemplate = async function(templateId, downloadUrl) {
   }
 };
 
-window.openInTexlyre = function(downloadUrl) {
+window.openInTexlyre = function (downloadUrl) {
   const texlyreUrl = `https://texlyre.github.io/texlyre/?template=${encodeURIComponent(downloadUrl)}`;
   window.open(texlyreUrl, '_blank');
 };

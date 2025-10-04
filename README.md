@@ -1,16 +1,16 @@
 # TeXlyre Templates
 
-LaTeX templates for [TeXlyre](https://texlyre.github.io/texlyre/), the local-first collaborative LaTeX editor.
+LaTeX and Typst templates for [TeXlyre](https://texlyre.github.io/texlyre/), the local-first collaborative LaTeX editor.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/texlyre-templates.svg)](https://badge.fury.io/js/texlyre-templates)
 
 ## Features
 
-- Community-driven LaTeX template collection
+- Community-driven LaTeX and Typst template collection
 - Type-safe JavaScript/TypeScript API
 - Integration with TeXlyre collaborative editor
-- Searchable templates by tags, categories, and content
+- Searchable templates by tags, categories, content, and type
 - Easy template import and download
 - Standardized metadata and validation
 
@@ -109,6 +109,7 @@ interface Template {
   lastUpdated: string;
   downloadUrl: string;
   previewImage?: string;
+  type?: 'latex' | 'typst';
 }
 ```
 

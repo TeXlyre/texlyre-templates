@@ -69,7 +69,8 @@ section {
   padding: 2rem;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin-top: 0;
 }
 
@@ -91,6 +92,11 @@ h1, h2 {
   border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 1rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
 }
 
 .filter-controls select {
@@ -261,7 +267,8 @@ h1, h2 {
   background: #1976D2;
 }
 
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 3rem;
   color: #666;

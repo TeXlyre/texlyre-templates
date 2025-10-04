@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor">
   <title>TeXlyre Templates</title>
 </head>
+
 <body>
   <header>
     <h1>TeXlyre Templates</h1>
@@ -27,6 +29,11 @@
         <div class="filter-controls">
           <select id="categoryFilter">
             <option value="">All Categories</option>
+          </select>
+          <select id="typeFilter">
+            <option value="">All Types</option>
+            <option value="latex">LaTeX</option>
+            <option value="typst">Typst</option>
           </select>
         </div>
       </div>
@@ -77,7 +84,8 @@
       <div class="api-endpoint">
         GET https://texlyre.github.io/texlyre-templates/api/templates.json
       </div>
-      <p>The API returns all available templates organized by category, including metadata, download URLs, and preview images.</p>
+      <p>The API returns all available templates organized by category, including metadata, download URLs, and preview
+        images.</p>
     </section>
 
     <section class="usage">
@@ -103,4 +111,5 @@ const blob = await templatesApi.downloadTemplate(template);</code></pre>
     <p>Part of the <a href="https://texlyre.github.io/texlyre/">TeXlyre</a> project</p>
   </footer>
 </body>
+
 </html>
