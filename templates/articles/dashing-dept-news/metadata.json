@@ -1,0 +1,21 @@
+{
+    "id": "dashing-dept-news",
+    "name": "Dashing Dept News",
+    "description": "Share the news with bold graphic design and a modern layout. Perfect for newsletters, announcements, and email communications (https://github.com/typst/templates). Dashing Dept News template by Typst GmbH is licensed under MIT-0.",
+    "category": "articles",
+    "tags": [
+        "newsletter",
+        "news",
+        "announcement",
+        "email",
+        "design",
+        "office",
+        "typst"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.1",
+    "lastUpdated": "2024-11-01T00:00:00Z",
+    "downloadUrl": "template.zip",
+    "previewImage": "preview.png",
+    "type": "typst"
+}

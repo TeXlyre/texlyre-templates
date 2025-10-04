@@ -1,0 +1,20 @@
+{
+    "id": "appreciated-letter",
+    "name": "Appreciated Letter",
+    "description": "Correspond with business associates and your friends via mail. This template follows DIN 5008 standards for professional correspondence (https://github.com/typst/templates). Appreciated Letter template by Typst GmbH is licensed under MIT-0.",
+    "category": "letters",
+    "tags": [
+        "correspondence",
+        "mail",
+        "letter",
+        "DIN 5008",
+        "office",
+        "typst"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.0",
+    "lastUpdated": "2024-03-06T00:00:00Z",
+    "downloadUrl": "template.zip",
+    "previewImage": "preview.png",
+    "type": "typst"
+}

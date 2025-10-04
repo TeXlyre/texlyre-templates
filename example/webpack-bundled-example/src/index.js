@@ -74,32 +74,40 @@ class TemplatesDemo {
       return;
     }
 
-    const resultsHtml = templates.map(template => `
-      <div class="template-item">
-        <div class="template-header">
-          <h3>${template.name}</h3>
-          <span class="template-category">${template.category}</span>
+    const resultsHtml = templates.map(template => {
+      const templateType = template.type || 'latex';
+      return `
+        <div class="template-item">
+          <div class="template-header">
+            <h3>${template.name}</h3>
+            <span class="template-category">${template.category}</span>
+            <span class="template-type">${templateType.toUpperCase()}</span>
+          </div>
+          <p class="template-description">${template.description}</p>
+          <div class="template-meta">
+            <span class="template-author">by ${template.author}</span>
+            <span class="template-version">v${template.version}</span>
+          </div>
+          <div class="template-tags">
+            ${template.tags.slice(0, 5).map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+          <div class="template-actions">
+            <button onclick="downloadTemplate('${template.id}', '${template.downloadUrl}')">
+              Download
+            </button>
+            <button onclick="openInTexlyre(${this.escapeForAttribute(JSON.stringify(template))})">
+              Open in TeXlyre
+            </button>
+          </div>
         </div>
-        <p class="template-description">${template.description}</p>
-        <div class="template-meta">
-          <span class="template-author">by ${template.author}</span>
-          <span class="template-version">v${template.version}</span>
-        </div>
-        <div class="template-tags">
-          ${template.tags.slice(0, 5).map(tag => `<span class="tag">${tag}</span>`).join('')}
-        </div>
-        <div class="template-actions">
-          <button onclick="downloadTemplate('${template.id}', '${template.downloadUrl}')">
-            Download
-          </button>
-          <button onclick="openInTexlyre('${template.downloadUrl}')">
-            Open in TeXlyre
-          </button>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     container.innerHTML = resultsHtml;
+  }
+
+  escapeForAttribute(str) {
+    return str.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
   }
 
   hideLoading() {
@@ -112,7 +120,6 @@ class TemplatesDemo {
   }
 }
 
-// Global functions for button clicks
 window.downloadTemplate = async function (templateId, downloadUrl) {
   try {
     const template = { id: templateId, downloadUrl };
@@ -132,12 +139,13 @@ window.downloadTemplate = async function (templateId, downloadUrl) {
   }
 };
 
-window.openInTexlyre = function (downloadUrl) {
-  const texlyreUrl = `https://texlyre.github.io/texlyre/?template=${encodeURIComponent(downloadUrl)}`;
+window.openInTexlyre = function (templateJson) {
+  const template = JSON.parse(templateJson);
+  const newProjectType = template.type || 'latex';
+  const texlyreUrl = `https://texlyre.github.io/texlyre/#newProjectName:${encodeURIComponent(template.name)}&newProjectDescription:${encodeURIComponent(template.description)}&newProjectType:${newProjectType}&newProjectTags:${encodeURIComponent(template.tags.join(','))}&files:${encodeURIComponent(template.downloadUrl)}`;
   window.open(texlyreUrl, '_blank');
 };
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const demo = new TemplatesDemo();
   demo.init();

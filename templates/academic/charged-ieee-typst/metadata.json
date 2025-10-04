@@ -1,0 +1,23 @@
+{
+    "id": "charged-ieee-typst",
+    "name": "Charged IEEE (Typst)",
+    "description": "An IEEE-style paper template to publish at conferences and journals for Electrical Engineering, Computer Science, and Computer Engineering (https://github.com/typst/templates). Charged IEEE template by Typst GmbH is licensed under MIT-0.",
+    "category": "academic",
+    "tags": [
+        "ieee",
+        "electrical-engineering",
+        "computer-science",
+        "computer-engineering",
+        "software",
+        "paper",
+        "conference",
+        "journal",
+        "typst"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.4",
+    "lastUpdated": "2024-12-01T00:00:00Z",
+    "downloadUrl": "template.zip",
+    "previewImage": "preview.png",
+    "type": "typst"
+}
