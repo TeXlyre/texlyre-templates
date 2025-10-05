@@ -1,0 +1,24 @@
+{
+  "id": "touying-metropolis",
+  "name": "Touying Metropolis",
+  "description": "Typst Touying template for presentations with a clean and simple style based on the Metropolis theme (https://github.com/touying-typ/touying/blob/main/themes/metropolis.typ). ",
+  "category": "presentations",
+  "tags": [
+    "touying",
+    "seminar",
+    "slides",
+    "metropolis",
+    "presentation-style",
+    "powerpoint",
+    "figures",
+    "talk",
+    "academic",
+    "template",
+    "typst"
+  ],
+  "author": "TeXlyre Templates",
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-05T15:01:00Z",
+  "downloadUrl": "template.zip",
+  "previewImage": "preview.png"
+}
