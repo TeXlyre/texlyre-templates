@@ -1,9 +1,19 @@
 {
   "id": "tufte-latex",
-  "name": "Tufte LaTeX package",
+  "name": "Tufte LaTeX Package",
   "description": "A Tufte-inspired LaTeX class for producing handouts, papers, and books (https://github.com/Tufte-LaTeX/tufte-latex). Tufte template by Kevin Godby, Bil Kleb, and Bill Wood is licensed under Apache 2.0 - Copyright (c) 2007–2015. ",
   "category": "books",
-  "tags": ["paper", "book-design", "document-design", "tufte-style", "scientific", "open-access", "illustration", "handout", "template"],
+  "tags": [
+    "paper",
+    "book-design",
+    "document-design",
+    "tufte-style",
+    "scientific",
+    "open-access",
+    "illustration",
+    "handout",
+    "template"
+  ],
   "author": "TeXlyre Templates",
   "version": "1.0.0",
   "lastUpdated": "2019-09-10T02:01:00Z",

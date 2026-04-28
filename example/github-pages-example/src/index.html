@@ -107,9 +107,15 @@ const blob = await templatesApi.downloadTemplate(template);</code></pre>
   </main>
 
   <footer>
-    <p>MIT License &copy; 2025 <a href="https://abawi.me">Fares Abawi</a></p>
+    <p>MIT License &copy; <span id="year"></span> <a href="https://abawi.me">Fares Abawi</a></p>
     <p>Part of the <a href="https://texlyre.github.io/texlyre/">TeXlyre</a> project</p>
+
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 
 </html>

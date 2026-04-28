@@ -1,0 +1,23 @@
+{
+    "id": "ltx-talk-metropolis",
+    "name": "LTX-Talk Metropolis Theme",
+    "description": "A Metropolis-inspired theme for the modern ltx-talk presentation class, compatible with TeX Live 2026 onwards. Provides a clean and simple style with minimal visual noise, suitable for academic talks and seminars. LaTeX Talk Metropolis theme by TeXlyre Templates is licensed under CC-BY-SA 4.0 - Copyright (c) 2026. Inspired by the original mtheme by Matthias Vogelgesang (https://github.com/matze/mtheme).",
+    "category": "presentations",
+    "tags": [
+        "ltx-talk",
+        "seminar",
+        "slides",
+        "metropolis",
+        "presentation-style",
+        "powerpoint",
+        "figures",
+        "talk",
+        "academic",
+        "template"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.0",
+    "lastUpdated": "2026-04-28T00:00:00Z",
+    "downloadUrl": "template.zip",
+    "previewImage": "preview.png"
+}

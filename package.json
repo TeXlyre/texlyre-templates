@@ -1,6 +1,6 @@
 {
   "name": "texlyre-templates",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "LaTeX templates for TeXlyre - the local-first collaborative LaTeX editor",
   "author": "Fares Abawi <fares@abawi.me> (https://abawi.me)",
   "license": "MIT",
