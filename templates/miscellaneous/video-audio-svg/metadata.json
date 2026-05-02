@@ -1,0 +1,26 @@
+{
+    "id": "video-audio-svg",
+    "name": "Video Audio SVG",
+    "description": "A Typst library that enables video-SVG and audio-SVG rendering with a patched version of typst.ts. Provides lightweight helpers for embedding rich media-style SVG output in Typst-generated documents and previews. video-svg and audio-svg are licensed under MIT - Copyright (c) 2026.",
+    "category": "miscellaneous",
+    "tags": [
+        "typst",
+        "library",
+        "video",
+        "audio",
+        "svg",
+        "rendering",
+        "typst-ts",
+        "patched",
+        "media",
+        "figures",
+        "template"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.0",
+    "lastUpdated": "2026-05-02T00:00:00Z",
+    "license": "MIT",
+    "downloadUrl": "path",
+    "previewImage": "preview.png",
+    "type": "typst"
+}
