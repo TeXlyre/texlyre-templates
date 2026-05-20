@@ -19,5 +19,6 @@
   "version": "1.0.0",
   "lastUpdated": "2025-06-24T17:54:00Z",
   "downloadUrl": "template.zip",
-  "previewImage": "preview.png"
+  "previewImage": "preview.png",
+  "type": "latex"
 }
