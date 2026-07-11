@@ -21,6 +21,6 @@
     "downloadUrl": "template.zip",
     "previewImage": "preview.png",
     "type": "latex",
-    "compiler": "busytex-luatex",
+    "compile": "busytex-luatex",
     "file": "/demo_ltx.tex"
 }
