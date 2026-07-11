@@ -26,20 +26,42 @@ Don't see your category? [Open an issue](https://github.com/texlyre/texlyre-temp
 
 ## Template Structure
 
-Each template must follow this exact structure:
+A template can use a single flat layout or a versioned layout. The flat layout
+holds one version:
 
 ```
 templates/[category]/[template-id]/
-├── template.zip          # Required: LaTeX project files
+├── template.zip          # Required: LaTeX or Typst project files
 ├── metadata.json         # Required: Template metadata
 └── preview.png          # Recommended: Preview image (400x300px)
 ```
+
+The versioned layout keeps each version in its own `x.y.z` sub-folder, letting
+TeXlyre offer version selection and detect updates:
+
+```
+templates/[category]/[template-id]/
+├── 1.1.0/
+│   ├── template.zip
+│   ├── metadata.json
+│   └── preview.png       # Optional: version specific preview
+├── 1.0.0/
+│   ├── template.zip
+│   ├── metadata.json
+│   └── preview.png
+└── preview.png           # Optional: shared across versions, used as fallback
+```
+
+The build picks the highest semver folder as the latest and exposes every
+version in the API entry's `versions` array (newest first). A template folder
+is treated as versioned when it contains `x.y.z` sub-folders with a
+`metadata.json`; otherwise the flat `metadata.json` is used.
 
 ### Template ID Requirements
 
 - Use lowercase letters, numbers, and hyphens only
 - Be descriptive but concise (e.g., `ieee-conference-paper`, `basic-cv`) and include the year (YY) or month and year (MMYY) if necessary (e.g., `acm-conference-paper-25`, `new-fancy-journal-0224`).
-- Must be unique within the category
+- Must be unique within the category (the version folder name is not part of the id)
 
 ## metadata.json Schema
 
@@ -53,7 +75,9 @@ templates/[category]/[template-id]/
   "author": "Your Name or Organization",
   "version": "1.0.0",
   "lastUpdated": "2024-12-19T10:00:00Z",
-  "type": "latex"
+  "type": "latex",
+  "compile": "pdftex",
+  "file": "/main.tex"
 }
 ```
 
@@ -70,6 +94,8 @@ templates/[category]/[template-id]/
 | `author` | ✅ | Your name or organization |
 | `version` | ✅ | Semantic version (x.y.z) |
 | `lastUpdated` | ✅ | ISO 8601 date string |
+| `compile` | ❌ | Auto-compile after import: a LaTeX engine (`pdftex`, `xetex`, `busytex-pdftex`, `busytex-xetex`, `busytex-luatex`) or `typst` |
+| `file` | ❌ | Absolute path (from the project root) of the file to open after import, e.g. `/main.tex` |
 
 ### Tag Guidelines
 

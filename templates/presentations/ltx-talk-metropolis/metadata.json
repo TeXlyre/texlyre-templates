@@ -20,5 +20,7 @@
     "lastUpdated": "2026-04-28T00:00:00Z",
     "downloadUrl": "template.zip",
     "previewImage": "preview.png",
-    "type": "latex"
+    "type": "latex",
+    "compiler": "busytex-luatex",
+    "file": "/demo_ltx.tex"
 }

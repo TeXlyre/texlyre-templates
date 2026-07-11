@@ -21,5 +21,6 @@
   "lastUpdated": "2025-10-05T15:01:00Z",
   "downloadUrl": "template.zip",
   "previewImage": "preview.png",
-  "type": "typst"
+  "type": "typst",
+  "file": "/examples/article.typ"
 }

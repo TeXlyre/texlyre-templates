@@ -1,0 +1,377 @@
+{
+  "lastUpdated": "2026-07-11T18:55:45.229Z",
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "academic",
+      "name": "Academic Papers",
+      "description": "Research papers, theses, and academic documents",
+      "templates": [
+        {
+          "id": "arxiv-template-20",
+          "name": "ArXiv Template 2020",
+          "description": "A standard ArXiv template for preprint papers. This template is based on the ArXiv-style NeurIPS template (https://github.com/kourgeorge/arxiv-style). ArXiv template by George Kour is licensed under MIT - Copyright (c) 2020. ",
+          "category": "academic",
+          "tags": [
+            "paper",
+            "journal",
+            "preprint",
+            "arxiv",
+            "scientific",
+            "open-access",
+            "template"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2024-01-02T08:36:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/academic/arxiv-template-20/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/academic/arxiv-template-20/preview.png",
+          "type": "latex"
+        },
+        {
+          "id": "charged-ieee-typst",
+          "name": "Charged IEEE (Typst)",
+          "description": "An IEEE-style paper template to publish at conferences and journals for Electrical Engineering, Computer Science, and Computer Engineering (https://github.com/typst/templates). Charged IEEE template by Typst GmbH is licensed under MIT-0.",
+          "category": "academic",
+          "tags": [
+            "ieee",
+            "electrical-engineering",
+            "computer-science",
+            "computer-engineering",
+            "software",
+            "paper",
+            "conference",
+            "journal",
+            "typst"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "0.1.4",
+          "lastUpdated": "2024-12-01T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/academic/charged-ieee-typst/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/academic/charged-ieee-typst/preview.png",
+          "type": "typst"
+        },
+        {
+          "id": "ieee-conference-paper-24",
+          "name": "IEEE Conference Paper 2024",
+          "description": "The IEEE manuscript templates for conference proceedings. This template is based on the official IEEE LaTeX sample (https://www.ieee.org/conferences/publishing/templates).",
+          "category": "academic",
+          "tags": [
+            "ieee",
+            "conference",
+            "engineering",
+            "paper",
+            "academic",
+            "research",
+            "bibliography",
+            "2024"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2024-06-01T10:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/academic/ieee-conference-paper-24/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/academic/ieee-conference-paper-24/preview.png",
+          "type": "latex"
+        },
+        {
+          "id": "springer-nature-paper-25",
+          "name": "Springer Nature Paper 2025",
+          "description": "Professional Springer Nature journal paper template with 2025 formatting guidelines, including abstract, keywords, author affiliations, and structured sections for introduction, methods, results, and references.",
+          "category": "academic",
+          "tags": [
+            "springer",
+            "nature",
+            "journal",
+            "paper",
+            "academic",
+            "research",
+            "bibliography",
+            "2025"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2024-12-19T10:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/academic/springer-nature-paper-25/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/academic/springer-nature-paper-25/preview.png",
+          "type": "latex"
+        }
+      ]
+    },
+    {
+      "id": "presentations",
+      "name": "Presentations",
+      "description": "Slides and presentation templates for conferences and meetings",
+      "templates": [
+        {
+          "id": "beamer-metropolis",
+          "name": "Beamer Metropolis Theme",
+          "description": "A modern, simple LaTeX beamer theme that minimizes noise and maximizes space for content, featuring an optional progress bar (https://github.com/matze/mtheme). Beamer Metropolis theme by Matthias Vogelgesang is licensed under CC-BY-SA 4.0 - Copyright (c) 2015-2017. ",
+          "category": "presentations",
+          "tags": [
+            "beamer",
+            "seminar",
+            "slides",
+            "metropolis",
+            "presentation-style",
+            "powerpoint",
+            "figures",
+            "talk",
+            "academic",
+            "template"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.2.0",
+          "lastUpdated": "2017-01-23T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/presentations/beamer-metropolis/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/presentations/beamer-metropolis/preview.png",
+          "type": "latex"
+        },
+        {
+          "id": "beamer-metropolis-clean",
+          "name": "Beamer Clean & Simple",
+          "description": "LaTeX beamer template for presentations with a clean and simple style based on the Metropolis theme (https://github.com/klb2/beamer-presentation-template). Beamer Metropolis template by Karl-Ludwig Besser is licensed under Apache 2.0 - Copyright (c) 2023. ",
+          "category": "presentations",
+          "tags": [
+            "beamer",
+            "seminar",
+            "slides",
+            "metropolis",
+            "presentation-style",
+            "powerpoint",
+            "figures",
+            "talk",
+            "academic",
+            "template"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2025-06-24T17:54:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/presentations/beamer-metropolis-clean/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/presentations/beamer-metropolis-clean/preview.png",
+          "type": "latex"
+        },
+        {
+          "id": "ltx-talk-metropolis",
+          "name": "LTX-Talk Metropolis Theme",
+          "description": "A Metropolis-inspired theme for the modern ltx-talk presentation class, compatible with TeX Live 2026 onwards. Provides a clean and simple style with minimal visual noise, suitable for academic talks and seminars. LaTeX Talk Metropolis theme by TeXlyre Templates is licensed under CC-BY-SA 4.0 - Copyright (c) 2026. Inspired by the original mtheme by Matthias Vogelgesang (https://github.com/matze/mtheme).",
+          "category": "presentations",
+          "tags": [
+            "ltx-talk",
+            "seminar",
+            "slides",
+            "metropolis",
+            "presentation-style",
+            "powerpoint",
+            "figures",
+            "talk",
+            "academic",
+            "template"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "0.1.0",
+          "lastUpdated": "2026-04-28T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/presentations/ltx-talk-metropolis/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/presentations/ltx-talk-metropolis/preview.png",
+          "type": "latex",
+          "file": "/demo_ltx.tex"
+        },
+        {
+          "id": "touying-metropolis",
+          "name": "Touying Metropolis",
+          "description": "Typst Touying template for presentations with a clean and simple style based on the Metropolis theme (https://github.com/touying-typ/touying/blob/main/themes/metropolis.typ). ",
+          "category": "presentations",
+          "tags": [
+            "touying",
+            "seminar",
+            "slides",
+            "metropolis",
+            "presentation-style",
+            "powerpoint",
+            "figures",
+            "talk",
+            "academic",
+            "template",
+            "typst"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2025-10-05T15:01:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/presentations/touying-metropolis/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/presentations/touying-metropolis/preview.png",
+          "type": "typst",
+          "file": "/examples/article.typ"
+        }
+      ]
+    },
+    {
+      "id": "books",
+      "name": "Books & Reports",
+      "description": "Book layouts, technical manuals, and long-form documents",
+      "templates": [
+        {
+          "id": "tufte-latex",
+          "name": "Tufte LaTeX Package",
+          "description": "A Tufte-inspired LaTeX class for producing handouts, papers, and books (https://github.com/Tufte-LaTeX/tufte-latex). Tufte template by Kevin Godby, Bil Kleb, and Bill Wood is licensed under Apache 2.0 - Copyright (c) 2007–2015. ",
+          "category": "books",
+          "tags": [
+            "paper",
+            "book-design",
+            "document-design",
+            "tufte-style",
+            "scientific",
+            "open-access",
+            "illustration",
+            "handout",
+            "template"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2019-09-10T02:01:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/books/tufte-latex/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/books/tufte-latex/preview.png",
+          "type": "latex"
+        }
+      ]
+    },
+    {
+      "id": "letters",
+      "name": "Letters & CVs",
+      "description": "Formal letters, resumes, and personal documents",
+      "templates": [
+        {
+          "id": "appreciated-letter",
+          "name": "Appreciated Letter",
+          "description": "Correspond with business associates and your friends via mail. This template follows DIN 5008 standards for professional correspondence (https://github.com/typst/templates). Appreciated Letter template by Typst GmbH is licensed under MIT-0.",
+          "category": "letters",
+          "tags": [
+            "correspondence",
+            "mail",
+            "letter",
+            "DIN 5008",
+            "office",
+            "typst"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "0.1.0",
+          "lastUpdated": "2024-03-06T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/letters/appreciated-letter/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/letters/appreciated-letter/preview.png",
+          "type": "typst"
+        },
+        {
+          "id": "rover-resume",
+          "name": "Rover Resume",
+          "description": "A collection of Rover Resume/CV templates. This list offers a wide range of CV styles that are compatible with PdfTeX, with the exception of the fancy Rover template, which requires XeTeX. This template is a modification of Rover Resume (https://github.com/subidit/rover-resume). Rover Resume by Subidit is licensed under CC BY 4.0. ",
+          "category": "letters",
+          "tags": [
+            "resume",
+            "cv",
+            "professional",
+            "portfolio",
+            "personal",
+            "job",
+            "work",
+            "applicant"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2025-01-30T18:13:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/letters/rover-resume/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/letters/rover-resume/preview.png",
+          "type": "latex"
+        }
+      ]
+    },
+    {
+      "id": "articles",
+      "name": "Articles & Journals",
+      "description": "Journal articles, magazine layouts, and editorial content",
+      "templates": [
+        {
+          "id": "dashing-dept-news",
+          "name": "Dashing Dept News",
+          "description": "Share the news with bold graphic design and a modern layout. Perfect for newsletters, announcements, and email communications (https://github.com/typst/templates). Dashing Dept News template by Typst GmbH is licensed under MIT-0.",
+          "category": "articles",
+          "tags": [
+            "newsletter",
+            "news",
+            "announcement",
+            "email",
+            "design",
+            "office",
+            "typst"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "0.1.1",
+          "lastUpdated": "2024-11-01T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/articles/dashing-dept-news/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/articles/dashing-dept-news/preview.png",
+          "type": "typst"
+        }
+      ]
+    },
+    {
+      "id": "posters",
+      "name": "Posters & Flyers",
+      "description": "Academic posters, conference presentations, and promotional materials",
+      "templates": []
+    },
+    {
+      "id": "miscellaneous",
+      "name": "TeXlyre Samples",
+      "description": "Various examples",
+      "templates": [
+        {
+          "id": "tikz-samples",
+          "name": "TeXlyre TikZ Example",
+          "description": "TeXlyre TikZ example compiled with swiftlatex's PdfTeX.",
+          "category": "miscellaneous",
+          "tags": [
+            "samples",
+            "examples",
+            "pdftex",
+            "tikz",
+            "plots",
+            "diagrams",
+            "figures",
+            "2025"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "1.0.0",
+          "lastUpdated": "2025-07-14T12:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/miscellaneous/tikz-samples/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/miscellaneous/tikz-samples/preview.png",
+          "type": "latex"
+        },
+        {
+          "id": "video-audio-svg",
+          "name": "Video Audio SVG",
+          "description": "A Typst library that enables video-SVG and audio-SVG rendering with a patched version of typst.ts. Provides lightweight helpers for embedding rich media-style SVG output in Typst-generated documents and previews. video-svg and audio-svg are licensed under MIT - Copyright (c) 2026.",
+          "category": "miscellaneous",
+          "tags": [
+            "typst",
+            "library",
+            "video",
+            "audio",
+            "html",
+            "svg",
+            "rendering",
+            "typst-ts",
+            "patched",
+            "media",
+            "figures",
+            "media-svg",
+            "audio-svg",
+            "video-svg"
+          ],
+          "author": "TeXlyre Templates",
+          "version": "0.2.1",
+          "lastUpdated": "2026-05-08T00:00:00Z",
+          "downloadUrl": "https://texlyre.github.io/texlyre-templates/templates/miscellaneous/video-audio-svg/template.zip",
+          "previewImage": "https://texlyre.github.io/texlyre-templates/templates/miscellaneous/video-audio-svg/preview.png",
+          "type": "typst"
+        }
+      ]
+    }
+  ]
+}

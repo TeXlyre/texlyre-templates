@@ -165,8 +165,18 @@ class TemplatesBrowser {
 
     const category = this.categories.find(cat => cat.id === template.category);
     const templateType = template.type || 'latex';
+    const hasMultipleVersions = template.versions && template.versions.length > 1;
+
+    const versionMarkup = hasMultipleVersions
+      ? `<select class="template-version-select" data-role="version-select">
+          ${template.versions.map(v => `<option value="${v.version}">v${v.version}</option>`).join('')}
+        </select>`
+      : template.version
+        ? `<span class="template-version">v${template.version}</span>`
+        : '';
 
     card.innerHTML = `
+      <span class="template-type">${templateType.toUpperCase()}</span>
       <div class="template-preview">
         ${template.previewImage
         ? `<img src="${template.previewImage}" alt="${template.name} preview" loading="lazy">`
@@ -176,9 +186,10 @@ class TemplatesBrowser {
       <div class="template-info">
         <h3 class="template-name">${template.name}</h3>
         <p class="template-description">${template.description}</p>
+        
         <div class="template-meta">
           <span class="template-category">${category ? category.name : template.category}</span>
-          <span class="template-type">${templateType.toUpperCase()}</span>
+          ${versionMarkup}
           <span class="template-author">by ${template.author}</span>
         </div>
         <div class="template-tags">
@@ -199,13 +210,33 @@ class TemplatesBrowser {
   setupTemplateCardEvents(card, template) {
     const downloadBtn = card.querySelector('.btn-download');
     const texlyreBtn = card.querySelector('.btn-texlyre');
+    const versionSelect = card.querySelector('[data-role="version-select"]');
+
+    const getEffectiveTemplate = () => {
+      if (!versionSelect) return template;
+
+      const versionEntry = template.versions.find(
+        v => v.version === versionSelect.value,
+      );
+      if (!versionEntry) return template;
+
+      return {
+        ...template,
+        version: versionEntry.version,
+        downloadUrl: versionEntry.downloadUrl,
+        previewImage: versionEntry.previewImage,
+        lastUpdated: versionEntry.lastUpdated,
+        compile: versionEntry.compile,
+        file: versionEntry.file,
+      };
+    };
 
     downloadBtn.addEventListener('click', async () => {
       try {
         downloadBtn.textContent = 'Downloading...';
         downloadBtn.disabled = true;
 
-        const blob = await templatesApi.downloadTemplate(template);
+        const blob = await templatesApi.downloadTemplate(getEffectiveTemplate());
         this.downloadBlob(blob, `${template.id}.zip`);
 
         downloadBtn.textContent = 'Downloaded!';
@@ -224,8 +255,15 @@ class TemplatesBrowser {
     });
 
     texlyreBtn.addEventListener('click', () => {
-      const newProjectType = template.type || 'latex';
-      const texlyreUrl = `https://texlyre.github.io/texlyre/#newProjectName:${encodeURIComponent(template.name)}&newProjectDescription:${encodeURIComponent(template.description)}&newProjectType:${newProjectType}&newProjectTags:${encodeURIComponent(template.tags.join(','))}&files:${encodeURIComponent(template.downloadUrl)}`;
+      const effectiveTemplate = getEffectiveTemplate();
+      const newProjectType = effectiveTemplate.type || 'latex';
+      const fileSuffix = effectiveTemplate.file
+        ? `&file:${encodeURIComponent(effectiveTemplate.file)}`
+        : '';
+      const compileSuffix = effectiveTemplate.compile
+        ? `&compile:${encodeURIComponent(effectiveTemplate.compile)}`
+        : '';
+      const texlyreUrl = `https://texlyre.github.io/texlyre/#newProjectName:${encodeURIComponent(effectiveTemplate.name)}&newProjectDescription:${encodeURIComponent(effectiveTemplate.description)}&newProjectType:${newProjectType}&newProjectTags:${encodeURIComponent(effectiveTemplate.tags.join(','))}&newProjectFiles:${encodeURIComponent(effectiveTemplate.downloadUrl)}${fileSuffix}${compileSuffix}`;
       window.open(texlyreUrl, '_blank');
     });
   }

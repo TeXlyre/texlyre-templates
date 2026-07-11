@@ -1,6 +1,15 @@
 // src/utils.ts
 import { TemplateMetadata, TemplateCategory } from './types';
 
+const VALID_COMPILE_VALUES = [
+  'pdftex',
+  'xetex',
+  'busytex-pdftex',
+  'busytex-xetex',
+  'busytex-luatex',
+  'typst',
+];
+
 export function validateTemplateMetadata(metadata: any): TemplateMetadata {
   const requiredFields = ['id', 'name', 'description', 'category', 'tags', 'author', 'version', 'lastUpdated'];
 
@@ -26,6 +35,14 @@ export function validateTemplateMetadata(metadata: any): TemplateMetadata {
 
   if (metadata.type && metadata.type !== 'latex' && metadata.type !== 'typst') {
     throw new Error('Type must be either "latex" or "typst"');
+  }
+
+  if (metadata.compile !== undefined && !VALID_COMPILE_VALUES.includes(metadata.compile)) {
+    throw new Error(`compile must be one of: ${VALID_COMPILE_VALUES.join(', ')}`);
+  }
+
+  if (metadata.file !== undefined && typeof metadata.file !== 'string') {
+    throw new Error('file must be a string');
   }
 
   if (metadata.description && metadata.description.length < 20) {
@@ -84,7 +101,9 @@ export function generateTemplateMetadata(
   category: string,
   author: string,
   tags: string[] = [],
-  type: 'latex' | 'typst' = 'latex'
+  type: 'latex' | 'typst' = 'latex',
+  compile?: string,
+  file?: string
 ): TemplateMetadata {
   return {
     id,
@@ -95,6 +114,8 @@ export function generateTemplateMetadata(
     author,
     version: '1.0.0',
     lastUpdated: new Date().toISOString(),
-    type
+    type,
+    compile,
+    file
   };
 }

@@ -110,6 +110,18 @@ interface Template {
   downloadUrl: string;
   previewImage?: string;
   type?: 'latex' | 'typst';
+  compile?: string;
+  file?: string;
+  versions?: TemplateVersion[];
+}
+
+interface TemplateVersion {
+  version: string;
+  downloadUrl: string;
+  previewImage?: string;
+  lastUpdated: string;
+  compile?: string;
+  file?: string;
 }
 ```
 

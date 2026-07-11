@@ -19,6 +19,18 @@ export interface Template {
   downloadUrl: string;
   previewImage?: string;
   type?: TemplateType;
+  compile?: string;
+  file?: string;
+  versions?: TemplateVersion[];
+}
+
+export interface TemplateVersion {
+  version: string;
+  downloadUrl: string;
+  previewImage?: string;
+  lastUpdated: string;
+  compile?: string;
+  file?: string;
 }
 
 export interface TemplatesAPI {
@@ -44,4 +56,6 @@ export interface TemplateMetadata {
   downloadUrl?: string;
   previewImage?: string;
   type?: TemplateType;
+  compile?: string;
+  file?: string;
 }

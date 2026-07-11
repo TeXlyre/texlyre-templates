@@ -6,6 +6,33 @@ const yaml = require('js-yaml');
 const TEMPLATES_DIR = './templates';
 const CATEGORIES_FILE = './categories.yml';
 
+const SEMVER_DIR = /^\d+\.\d+\.\d+/;
+
+const VALID_COMPILE_VALUES = [
+  'pdftex',
+  'xetex',
+  'busytex-pdftex',
+  'busytex-xetex',
+  'busytex-luatex',
+  'typst',
+];
+
+function discoverTemplateVersions(templatePath) {
+  const versionDirs = fs.readdirSync(templatePath, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory() && SEMVER_DIR.test(dirent.name))
+    .map(dirent => dirent.name)
+    .filter(name => fs.existsSync(path.join(templatePath, name, 'metadata.json')));
+
+  if (versionDirs.length > 0) {
+    return versionDirs.map(version => ({
+      version,
+      path: path.join(templatePath, version),
+    }));
+  }
+
+  return [{ version: null, path: templatePath }];
+}
+
 class TemplateValidator {
   constructor() {
     this.errors = [];
@@ -90,6 +117,26 @@ class TemplateValidator {
 
       if (metadata.description && metadata.description.length < 20) {
         this.log('warning', 'Description is quite short, consider adding more detail', templateId);
+      }
+
+      if (metadata.compile !== undefined) {
+        if (typeof metadata.compile !== 'string') {
+          this.log('error', 'compile must be a string', templateId);
+        } else if (!VALID_COMPILE_VALUES.includes(metadata.compile)) {
+          this.log('warning', `Unrecognized compile value: ${metadata.compile} (expected one of ${VALID_COMPILE_VALUES.join(', ')})`, templateId);
+        } else if (metadata.compile === 'typst' && metadata.type !== 'typst') {
+          this.log('warning', 'compile is "typst" but type is not "typst"', templateId);
+        } else if (metadata.compile !== 'typst' && metadata.type === 'typst') {
+          this.log('warning', `compile ("${metadata.compile}") is a LaTeX engine but type is "typst"`, templateId);
+        }
+      }
+
+      if (metadata.file !== undefined) {
+        if (typeof metadata.file !== 'string') {
+          this.log('error', 'file must be a string', templateId);
+        } else if (!metadata.file.startsWith('/')) {
+          this.log('warning', 'file should be an absolute path within the project (e.g. "/main.tex")', templateId);
+        }
       }
 
       return metadata;
@@ -216,25 +263,30 @@ class TemplateValidator {
       console.log(`\nValidating category: ${categoryId} (${templateDirs.length} templates)`);
 
       for (const templateId of templateDirs) {
-        totalTemplates++;
         const templatePath = path.join(categoryPath, templateId);
+        const versions = discoverTemplateVersions(templatePath);
 
-        console.log(`\n  ${templateId}`);
+        for (const versionInfo of versions) {
+          totalTemplates++;
+          const label = versionInfo.version ? `${templateId}@${versionInfo.version}` : templateId;
 
-        if (!this.validateRequiredFiles(templatePath, templateId)) {
-          continue;
+          console.log(`\n  ${label}`);
+
+          if (!this.validateRequiredFiles(versionInfo.path, label)) {
+            continue;
+          }
+
+          const metadata = this.validateMetadata(versionInfo.path, templateId, categoryId, validCategories);
+          if (!metadata) {
+            continue;
+          }
+
+          this.validateZipFile(versionInfo.path, label);
+          this.validatePreviewImage(versionInfo.path, label);
+
+          validTemplates++;
+          this.log('info', 'Template validation passed', label);
         }
-
-        const metadata = this.validateMetadata(templatePath, templateId, categoryId, validCategories);
-        if (!metadata) {
-          continue;
-        }
-
-        this.validateZipFile(templatePath, templateId);
-        this.validatePreviewImage(templatePath, templateId);
-
-        validTemplates++;
-        this.log('info', 'Template validation passed', templateId);
       }
     }
 

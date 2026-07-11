@@ -63,32 +63,72 @@ function discoverTemplateCategories() {
     .map(dirent => dirent.name);
 }
 
-function resolveImageUrl(metadataUrl, templatePath, categoryId, templateId) {
+const SEMVER_DIR = /^\d+\.\d+\.\d+/;
+
+function compareVersionsDesc(a, b) {
+  const pa = a.split('.').map(n => parseInt(n, 10) || 0);
+  const pb = b.split('.').map(n => parseInt(n, 10) || 0);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const diff = (pb[i] ?? 0) - (pa[i] ?? 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
+function discoverTemplateVersions(templatePath) {
+  const versionDirs = fs.readdirSync(templatePath, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory() && SEMVER_DIR.test(dirent.name))
+    .map(dirent => dirent.name)
+    .filter(name => fs.existsSync(path.join(templatePath, name, 'metadata.json')))
+    .sort(compareVersionsDesc);
+
+  if (versionDirs.length > 0) {
+    return versionDirs.map(version => ({
+      version,
+      dir: version,
+      templatePath: path.join(templatePath, version),
+      metadataPath: path.join(templatePath, version, 'metadata.json'),
+    }));
+  }
+
+  const flatMetadata = path.join(templatePath, 'metadata.json');
+  if (fs.existsSync(flatMetadata)) {
+    return [{ version: null, dir: null, templatePath, metadataPath: flatMetadata }];
+  }
+
+  return [];
+}
+
+function resolveImageUrl(metadataUrl, templatePath, categoryId, templateId, versionDir) {
   if (metadataUrl) {
     if (metadataUrl.startsWith('http://') || metadataUrl.startsWith('https://')) {
       return metadataUrl;
     } else {
-      return `${BASE_URL}/templates/${categoryId}/${templateId}/${metadataUrl}`;
+      const versionSegment = versionDir ? `${versionDir}/` : '';
+      return `${BASE_URL}/templates/${categoryId}/${templateId}/${versionSegment}${metadataUrl}`;
     }
   }
 
   if (fs.existsSync(path.join(templatePath, 'preview.png'))) {
-    return `${BASE_URL}/templates/${categoryId}/${templateId}/preview.png`;
+    const versionSegment = versionDir ? `${versionDir}/` : '';
+    return `${BASE_URL}/templates/${categoryId}/${templateId}/${versionSegment}preview.png`;
   }
 
   return undefined;
 }
 
-function resolveDownloadUrl(metadataUrl, categoryId, templateId) {
+function resolveDownloadUrl(metadataUrl, categoryId, templateId, versionDir) {
+  const versionSegment = versionDir ? `${versionDir}/` : '';
+
   if (metadataUrl) {
     if (metadataUrl.startsWith('http://') || metadataUrl.startsWith('https://')) {
       return metadataUrl;
     } else {
-      return `${BASE_URL}/templates/${categoryId}/${templateId}/${metadataUrl}`;
+      return `${BASE_URL}/templates/${categoryId}/${templateId}/${versionSegment}${metadataUrl}`;
     }
   }
 
-  return `${BASE_URL}/templates/${categoryId}/${templateId}/template.zip`;
+  return `${BASE_URL}/templates/${categoryId}/${templateId}/${versionSegment}template.zip`;
 }
 
 async function buildApi() {
@@ -140,46 +180,71 @@ async function buildApi() {
 
       for (const templateId of templateDirs) {
         const templatePath = path.join(categoryPath, templateId);
-        const metadataPath = path.join(templatePath, 'metadata.json');
+        const versions = discoverTemplateVersions(templatePath);
 
-        if (!fs.existsSync(metadataPath)) {
+        if (versions.length === 0) {
           console.warn(`  No metadata.json found for template '${templateId}'`);
           continue;
         }
 
         try {
-          const metadataContent = fs.readFileSync(metadataPath, 'utf8');
-          const metadata = JSON.parse(metadataContent);
+          const versionEntries = [];
+          let latestMetadata = null;
 
-          if (!metadata.id || !metadata.name || !metadata.description) {
-            console.warn(`  Template '${templateId}' missing required fields`);
+          for (const versionInfo of versions) {
+            const metadataContent = fs.readFileSync(versionInfo.metadataPath, 'utf8');
+            const metadata = JSON.parse(metadataContent);
+
+            if (!metadata.id || !metadata.name || !metadata.description) {
+              console.warn(`  Template '${templateId}'${versionInfo.dir ? `@${versionInfo.dir}` : ''} missing required fields`);
+              continue;
+            }
+
+            if (metadata.id !== templateId) {
+              console.warn(`  Template ID mismatch: ${metadata.id} != ${templateId}`);
+            }
+
+            if (metadata.category !== categoryId) {
+              console.warn(`  Template category mismatch: ${metadata.category} != ${categoryId}`);
+            }
+
+            versionEntries.push({
+              version: metadata.version,
+              downloadUrl: resolveDownloadUrl(metadata.downloadUrl, categoryId, templateId, versionInfo.dir),
+              previewImage: resolveImageUrl(metadata.previewImage, versionInfo.templatePath, categoryId, templateId, versionInfo.dir),
+              lastUpdated: metadata.lastUpdated,
+              compile: metadata.compile,
+              file: metadata.file,
+            });
+
+            if (!latestMetadata) latestMetadata = metadata;
+          }
+
+          if (!latestMetadata) {
             continue;
           }
 
-          if (metadata.id !== templateId) {
-            console.warn(`  Template ID mismatch: ${metadata.id} != ${templateId}`);
-          }
-
-          if (metadata.category !== categoryId) {
-            console.warn(`  Template category mismatch: ${metadata.category} != ${categoryId}`);
-          }
+          const latestVersionEntry = versionEntries[0];
 
           const template = {
             id: templateId,
-            name: metadata.name,
-            description: metadata.description,
+            name: latestMetadata.name,
+            description: latestMetadata.description,
             category: categoryId,
-            tags: metadata.tags,
-            author: metadata.author,
-            version: metadata.version,
-            lastUpdated: metadata.lastUpdated,
-            downloadUrl: resolveDownloadUrl(metadata.downloadUrl, categoryId, templateId),
-            previewImage: resolveImageUrl(metadata.previewImage, templatePath, categoryId, templateId),
-            type: metadata.type || 'latex'
+            tags: latestMetadata.tags,
+            author: latestMetadata.author,
+            version: latestMetadata.version,
+            lastUpdated: latestMetadata.lastUpdated,
+            downloadUrl: latestVersionEntry.downloadUrl,
+            previewImage: latestVersionEntry.previewImage,
+            type: latestMetadata.type || 'latex',
+            compile: latestMetadata.compile,
+            file: latestMetadata.file,
+            versions: versionEntries.length > 1 ? versionEntries : undefined,
           };
 
           category.templates.push(template);
-          console.log(`  ✓ Added template: ${template.name}`);
+          console.log(`  ✓ Added template: ${template.name} (${versionEntries.length} version${versionEntries.length === 1 ? '' : 's'})`);
 
         } catch (error) {
           console.error(`  Error parsing metadata for '${templateId}': ${error.message}`);

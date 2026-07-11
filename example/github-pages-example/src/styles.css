@@ -184,6 +184,18 @@ h2 {
   color: var(--text-color);
 }
 
+.template-type {
+  position: absolute;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0 12px 12px 0;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
 .template-description {
   color: #666;
   margin: 0 0 1rem 0;
@@ -205,6 +217,29 @@ h2 {
   padding: 0.2rem 0.5rem;
   border-radius: 12px;
   font-size: 0.75rem;
+}
+
+.template-version {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.template-version-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  cursor: pointer;
 }
 
 .template-tags {
