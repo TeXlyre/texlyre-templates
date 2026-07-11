@@ -25,5 +25,7 @@
     "license": "MIT",
     "downloadUrl": "template.zip",
     "previewImage": "preview.png",
-    "type": "typst"
+    "type": "typst",
+    "compile": "typst",
+    "file": "/examples/article.typ"
 }
