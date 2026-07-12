@@ -1,0 +1,24 @@
+{
+    "id": "animate-ocg-samples",
+    "name": "PDF Animations & OCG Layers",
+    "description": "Interactive PDF samples combining animated TikZ figures (animate package: orbit with trail, harmonic pendulum, travelling wave, rotating star) with toggleable optional content layers (ocgx2: single toggle, independent layers, view swapping). Includes a LuaLaTeX variant where frame geometry is computed in Lua via luacode.",
+    "category": "miscellaneous",
+    "tags": [
+        "animate",
+        "ocgx2",
+        "tikz",
+        "interactive-pdf",
+        "layers",
+        "luacode",
+        "samples",
+        "2026"
+    ],
+    "author": "TeXlyre Templates",
+    "version": "0.1.0",
+    "lastUpdated": "2026-07-12T12:00:00Z",
+    "downloadUrl": "template.zip",
+    "previewImage": "preview.png",
+    "type": "latex",
+    "compile": "busytex-luatex",
+    "file": "/demo_ocg_animate.tex"
+}
