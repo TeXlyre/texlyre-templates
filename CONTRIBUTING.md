@@ -33,7 +33,7 @@ holds one version:
 templates/[category]/[template-id]/
 ├── template.zip          # Required: LaTeX or Typst project files
 ├── metadata.json         # Required: Template metadata
-└── preview.png          # Recommended: Preview image (400x300px)
+└── preview.png           # Recommended: Preview image (400x300px)
 ```
 
 The versioned layout keeps each version in its own `x.y.z` sub-folder, letting
@@ -44,12 +44,11 @@ templates/[category]/[template-id]/
 ├── 1.1.0/
 │   ├── template.zip
 │   ├── metadata.json
-│   └── preview.png       # Optional: version specific preview
-├── 1.0.0/
-│   ├── template.zip
-│   ├── metadata.json
-│   └── preview.png
-└── preview.png           # Optional: shared across versions, used as fallback
+│   └── preview.png      
+└── 1.0.0/
+    ├── template.zip
+    ├── metadata.json
+    └── preview.png
 ```
 
 The build picks the highest semver folder as the latest and exposes every
